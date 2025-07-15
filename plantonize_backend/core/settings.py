@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e^*h2jgsh_8vbqms#y4g7%ol&6b6^oo$=wz7q#9_^zlk)1kyar
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['plantonize-backend.onrender.com']
 
 
 # Application definition
@@ -142,5 +142,6 @@ AUTH_USER_MODEL = 'usuarios.Usuario'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://plantonize-frontend.vercel.app",
 ]
 
