@@ -145,3 +145,25 @@ class UsuarioLogadoView(APIView):
     def get(self, request):
         serializer = UsuarioSerializer(request.user)
         return Response(serializer.data)
+
+# --------------------------------------------
+# Criação de superusuário temporário (apenas para desenvolvimento)
+# --------------------------------------------
+
+from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+@csrf_exempt
+def criar_superuser_temporario(request):
+    """
+    Cria um superusuário admin com senha 123admin
+    Acesse uma única vez: /criar-admin/
+    Lembre de remover após o uso!
+    """
+    User = get_user_model()
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("admin", "admin@example.com", "123admin")
+        return JsonResponse({"status": "Superusuário criado com sucesso"})
+    return JsonResponse({"status": "Superusuário já existe"})
