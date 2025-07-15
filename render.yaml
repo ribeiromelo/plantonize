@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: plantonize-backend
+    env: python
+    rootDir: plantonize_backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python manage.py runserver 0.0.0.0:8000"
+    preDeployCommand: "python manage.py migrate"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        fromEnvVar: DJANGO_SECRET_KEY
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: onrender.com
